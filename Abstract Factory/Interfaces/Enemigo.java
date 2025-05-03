@@ -35,6 +35,7 @@ public interface Enemigo {
 
     
 
+
     /*
      
      -boss final
@@ -102,5 +103,14 @@ public interface Enemigo {
       
       
      * */
+
+    // TO DO add print ASCII
+
+    //prueba3
+    //adafafaf
+
+    //prueba
+
+
 
 }
