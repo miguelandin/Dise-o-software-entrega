@@ -30,4 +30,6 @@ public interface Enemigo {
     
     // Método para obtener los puntos otorgados al jugador al derrotar este enemigo
     int getPuntos();
+    
+    // TO DO add print ASCII
 }

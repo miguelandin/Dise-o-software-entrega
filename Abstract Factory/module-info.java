@@ -4,5 +4,5 @@
 /**
  * 
  */
-module bueno {
+module RPGentrega {
 }
