@@ -175,13 +175,30 @@ public class GameController {
                                     System.out.println("      |   |                             |.");
                                     System.out.println("       \\_/|  » DISTRIBUCIÓN DE PUNTOS « |.");
                                     System.out.println("          |                             |.");
-                                    System.out.println("          |  » Daño: " + danio + "                  |.");
+                                    if (danio > 9) {
+                                        System.out.println("          |  » Daño: " + danio + "                 |.");
+                                    } else {
+                                        System.out.println("          |  » Daño: " + danio + "                  |.");
+                                    }
                                     System.out.println("          |                             |.");
-                                    System.out.println("          |  » Magia: " + magia + "                 |.");
+                                    if (magia > 9) {
+                                        System.out.println("          |  » Magia: " + magia + "                |.");
+                                    } else {
+                                        System.out.println("          |  » Magia: " + magia + "                 |.");
+                                    }
                                     System.out.println("          |                             |.");
-                                    System.out.println("          |  » Armadura: " + armadura + "              |.");
+                                    if (armadura > 9) {
+                                        System.out.println("          |  » Armadura: " + armadura + "             |.");
+                                    } else {
+                                        System.out.println("          |  » Armadura: " + armadura + "              |.");
+                                    }
                                     System.out.println("          |                             |.");
-                                    System.out.println("          |  » Velocidad: " + velocidad + "             |.");
+                                    if (velocidad > 9) {
+                                        System.out.println("          |  » Velocidad: " + velocidad + "            |.");
+                                    } else {
+                                        System.out
+                                                .println("          |  » Velocidad: " + velocidad + "             |.");
+                                    }
                                     System.out.println("          |                             |.");
                                     System.out.println("          |   __________________________|__");
                                     System.out.println("          |  /                            /.");
@@ -243,11 +260,23 @@ public class GameController {
                         System.out.println("      |   |                             |.");
                         System.out.println("       \\_/|  » DISTRIBUCIÓN DE PUNTOS « |.");
                         System.out.println("          |                             |.");
-                        System.out.println("          |  » Daño: " + danio + "                 |.");
+                        if (eleccion2 == 1) {
+                            System.out.println("          |  » Daño: " + danio + "                 |.");
+                        } else {
+                            System.out.println("          |  » Daño: " + danio + "                  |.");
+                        }
                         System.out.println("          |                             |.");
-                        System.out.println("          |  » Magia: " + magia + "                 |.");
+                        if (eleccion2 == 3) {
+                            System.out.println("          |  » Magia: " + magia + "                |.");
+                        } else {
+                            System.out.println("          |  » Magia: " + magia + "                 |.");
+                        }
                         System.out.println("          |                             |.");
-                        System.out.println("          |  » Armadura: " + armadura + "               |.");
+                        if (eleccion2 == 2) {
+                            System.out.println("          |  » Armadura: " + armadura + "             |.");
+                        } else {
+                            System.out.println("          |  » Armadura: " + armadura + "              |.");
+                        }
                         System.out.println("          |                             |.");
                         System.out.println("          |  » Velocidad: " + velocidad + "             |.");
                         System.out.println("          |                             |.");
