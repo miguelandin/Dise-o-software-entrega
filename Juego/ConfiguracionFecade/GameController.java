@@ -13,32 +13,40 @@ import Jugador.Jugador;
 
 public class GameController {
     
+    // Instancia Ãºnica del controlador del juego
     private static GameController instancia = new GameController();
+    // Instancia del controlador de la calculadora para realizar cÃ¡lculos relacionados con el juego
     private static CalculadoraController calculadora = CalculadoraController.getInstancia();
     
+    // FactorÃ­a de enemigos inicial: Bosque
     private FactoriaEnemigos factoriaEnemigos = new Factoria_Bosque();
     // Mundo inicial: Bosque
     private Mundos mundos = Mundos.BOSQUE;
     
     private GameController(){}
     
+    // MÃ©todo estÃ¡tico para obtener la instancia Ãºnica del controlador del juego
     public static GameController getInstancia() {
         return instancia;
     }
     
+    // MÃ©todo principal para comenzar el juego
     public void jugar() {        
         Scanner teclado = new Scanner(System.in);
         
         System.out.println("--- BIENVENIDO A RPGLAND ---");
+        System.out.println("Antes de comenzar la aventura, pasaremos a la creaciÃ³n de tu personaje: ");
         
         // Se crea el jugador
         Jugador jugador = crearJugador(teclado);
         Murcielago murcielago;
         
+        // Se crea el primer enemigo (murciÃ©lago)
         murcielago = factoriaEnemigos.crearMurcielago();
         
         // Bucle principal del juego, mientras el jugador tenga vida
         while(jugador.getVida() > 0) {
+            // Se verifica si el jugador estÃ¡ vivo antes de cada acciÃ³n
             if(jugador.getVida() > 0) System.out.println("MUNDO: " + mundos.getNombre());
             
             // Se juega en el mundo actual
@@ -47,8 +55,10 @@ public class GameController {
             // Se cambia al siguiente mundo
             if(jugador.getVida() > 0) cambiarMundo();
             
+            // Se verifica si el jugador estÃ¡ vivo despuÃ©s de cambiar de mundo
             if(jugador.getVida() > 0) System.out.println("MUNDO: " + mundos.getNombre());
             
+            // Se crea un nuevo murciÃ©lago para el prÃ³ximo encuentro
             if(jugador.getVida() > 0) murcielago = factoriaEnemigos.crearMurcielago();
             
             // Se juega en el nuevo mundo con el nuevo enemigo
@@ -66,6 +76,7 @@ public class GameController {
         teclado.close();
     }
     
+    // MÃ©todo para cambiar el mundo
     public void cambiarMundo() {
         if(this.mundos == Mundos.BOSQUE) {
             mundos = Mundos.TUNDRA;
@@ -81,6 +92,7 @@ public class GameController {
         }
     }
     
+    // MÃ©todo para crear al jugador
     public static Jugador crearJugador(Scanner teclado) {
         
         Jugador jugador;
@@ -101,6 +113,14 @@ public class GameController {
             
             switch(eleccion) {
                 case 1:
+                	boolean confirmacion = false; // Variable para controlar si el usuario está conforme
+                    do {
+                    danio=1;
+                    magia=1;
+                    armadura=1;
+                    velocidad=1;
+                    puntos=25;
+                    puntos_eleccion = 0;
                     System.out.println("\nDebes repartir los " + puntos + " puntos en las estadÃ­sticas:");
                     do {
                     	System.out.println("\nDistribucion de puntos: Fuerza: " + danio + "; Magia: " + magia + "; Armadura: " + armadura + "; Velocidad: " + velocidad);
@@ -136,20 +156,45 @@ public class GameController {
                             puntos -= puntos_eleccion;
                             
                             if(puntos > 0) {
-                                System.out.println("\nPuntos restantes para velocidad: " + puntos);
+                                System.out.println("\nPuntos restantes para velocidad: " + puntos + "\n");
                                 velocidad = puntos;
-                            	System.out.println("Distribucion de puntos: \n » Fuerza: " + danio + "\n » Magia: " + magia + "\n » Armadura: " + armadura + "\n » Velocidad: " + velocidad + "\n");
-
-                            }
-                        }
-                    }
+                                //pergamino de stats
+                        	    System.out.println("         _______________________________");
+                                System.out.println("       / \                              \.");
+                                System.out.println("      |   |                             |.");
+                                System.out.println("       \_/|  » DISTRIBUCIÓN DE PUNTOS « |.");
+                                System.out.println("          |                             |.");
+                                System.out.println("          |  » Daño: "+danio+"          |.");
+                                System.out.println("          |                             |.");
+                                System.out.println("          |  » Magia "+magia+"          |.");
+                                System.out.println("          |                             |.");
+                                System.out.println("          |  » Armadura: "+armadura+"   |.");
+                                System.out.println("          |                             |.");
+                                System.out.println("          |  » Velocidad: "+velocidad+" |.");
+                                System.out.println("          |                             |.");
+                                System.out.println("          |   __________________________|__");
+                                System.out.println("          |  /                            /.");
+                                System.out.println("          \_/____________________________/.");
+	                            }
+	                        }
+	                   	}
+	                        // Confirmar si el usuario está de acuerdo con la distribución
+	                        System.out.print("\n¿Estás conforme con la distribución de puntos? (s/n): ");
+	                        char respuesta = teclado.next().charAt(0);
+	                        confirmacion = (respuesta == 's' || respuesta == 'S'); // Si la respuesta es 's' o 'S', se confirma
+	                    
+	                  }while(!confirmacion);
+                    	break;
                     
-                    break;
+                    	
                     
                 case 2:
                     
                     do {
                         System.out.println("\nPersonajes disponibles:"
+                                + "\n1. Caballero (DaÃ±o: 10, Magia: 1, Armadura: 8, Velocidad: 6)"
+                                + "\n2. Tanque(DaÃ±o:5 , Magia: 1, Armadura: 15, Velocidad: 4)"
+                                + "\n3. Mago(DaÃ±o: 2, Magia: 15, Armadura: 2, Velocidad: 6)"
                                 + "\nSeleccion: ");
                         
                         eleccion2 = teclado.nextInt();
@@ -196,6 +241,7 @@ public class GameController {
         return jugador;
     }
     
+    // MÃ©todo para mostrar informaciÃ³n del murciÃ©lago
     private String mostrarMurcielago(Murcielago murcielago) {
     	System.out.println("      ....._      ");
         System.out.println("     `.   ``-.                               .-----.._");
@@ -216,20 +262,29 @@ public class GameController {
         return "HP: " + murcielago.getVida();
     }
     
+    
+    
+    
+    
+    // MÃ©todo para mostrar informaciÃ³n del jugador
     private String mostrarJugador(Jugador jugador) {
         return "HP: " + jugador.getVida() + ", ATK: " + jugador.getFuerza() + ", DEF: " + jugador.getArmadura() + ", MAG: " + jugador.getMagia() + ", VEL: " + jugador.getVelocidad();
     }
     
+    // MÃ©todo para jugar en un mundo especÃ­fico con un enemigo
     private void jugarMundo(Jugador jugador, Murcielago murcielago) {        
         Scanner teclado = new Scanner(System.in);
 
         int eleccion = 0;
         
+        // Bucle mientras el murciÃ©lago y el jugador estÃ©n vivos
         while(murcielago.getVida() > 0 && jugador.getVida() > 0) {
             
+            // Se muestra la informaciÃ³n del jugador y del murciÃ©lago
             System.out.println(jugador.getNombre() + " -> " + mostrarJugador(jugador));
             System.out.println(murcielago.getNombre() + " ->" + mostrarMurcielago(murcielago));
             
+            // Se solicita la acciÃ³n al jugador
             System.out.println("Que quieres hacer:"
                     + "\n1. Atacar."
                     + "\n2. Magia."
@@ -239,10 +294,12 @@ public class GameController {
             
             switch(eleccion) {
                 case 1:
+                    // Si la velocidad del jugador es mayor que la del murciÃ©lago, el jugador ataca primero
                     if(jugador.getVelocidad() > murcielago.getVelocidad()) {
                         calculadora.atacar_jugador(jugador, murcielago);
                         calculadora.atacar_enemigo(murcielago, jugador);
                     }else {
+                        // Si la velocidad del murciÃ©lago es mayor, el murciÃ©lago ataca primero
                         calculadora.atacar_enemigo(murcielago, jugador);
                         calculadora.atacar_jugador(jugador, murcielago);
                     }
@@ -292,6 +349,7 @@ public class GameController {
                     break;
             }
             
+            // Si el jugador estÃ¡ en un estado diferente a "Normal", recibe daÃ±o
             if(!jugador.getEstado().nombreEstado().equals("Normal")) {
                 calculadora.recibir_danio_estado(jugador);
             }
