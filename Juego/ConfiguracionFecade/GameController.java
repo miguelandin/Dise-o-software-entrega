@@ -304,27 +304,6 @@ public class GameController {
         return jugador;
     }
 
-    // MÃ©todo para mostrar informaciÃ³n del murciÃ©lago
-    private String mostrarMurcielago(Murcielago murcielago) {
-        System.out.println("      ....._      ");
-        System.out.println("     `.   ``-.                               .-----.._");
-        System.out.println("       `,     `-.                          .:      /`");
-        System.out.println("         :       `\"..                 ..-``       :");
-        System.out.println("         /   ...--:::`n            n.`::...       :");
-        System.out.println("         `:``      .` ::          /  `.     ``---..:.");
-        System.out.println("           `\\    .`  ._:  .-:   ::    `.     .-``");
-        System.out.println("             :  :    :_\\_/: :  .::      `.   /");
-        System.out.println("             : /      \\-../:/_.`-`        \\ :");
-        System.out.println("             :: _.._  Ø` Ø` /`              \\|");
-        System.out.println("             :-`    ``(_. ..-----hh``````/-._:");
-        System.out.println("                         `:      ``     /     `");
-        System.out.println("                         E:            /");
-        System.out.println("                          :          _/");
-        System.out.println("                          :    _..-``");
-        System.out.println("                          l--``");
-        return "HP: " + murcielago.getVida();
-    }
-
     // MÃ©todo para mostrar informaciÃ³n del jugador
     private String mostrarJugador(Jugador jugador) {
         return "HP: " + jugador.getVida() + ", ATK: " + jugador.getFuerza() + ", DEF: " + jugador.getArmadura()
@@ -343,7 +322,8 @@ public class GameController {
 
             // Se muestra la informaciÃ³n del jugador y del murciÃ©lago
             System.out.println(jugador.getNombre() + " -> " + mostrarJugador(jugador));
-            System.out.println(murcielago.getNombre() + " ->" + mostrarMurcielago(murcielago));
+            System.out.println(murcielago.getNombre() + " ->" + murcielago.getVida());
+            murcielago.printAscii();
 
             // Se solicita la acciÃ³n al jugador
             System.out.println("Que quieres hacer:"

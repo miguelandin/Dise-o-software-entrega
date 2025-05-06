@@ -6,5 +6,5 @@ public interface Murcielago extends Enemigo {
     EstadoJugador estadoAplicable();
     
     // Método para obtener la estrategia del murciélago
-    Murcielago_Estrategia estrategia();
+    Enemigo_Estrategia estrategia();
 }

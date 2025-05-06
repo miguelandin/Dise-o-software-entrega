@@ -4,11 +4,11 @@ import Estados.EstadoEnvenenado;
 import Interfaces.EstadoJugador;
 import Interfaces.Mundos;
 import Interfaces.Murcielago;
-import Interfaces.Murcielago_Estrategia;
+import Interfaces.Enemigo_Estrategia;
 
 // La clase Murcielago_Bosque implementa la interfaz Murcielago y representa un tipo de enemigo
 public class Murcielago_Bosque implements Murcielago {
-    private Murcielago_Estrategia estrategia;
+    private Enemigo_Estrategia estrategia;
     private String nombre;
     private int vida;
     private int danio;
@@ -18,7 +18,7 @@ public class Murcielago_Bosque implements Murcielago {
     private int puntos;
     
     // Constructor que recibe la estrategia del murciélago
-    public Murcielago_Bosque(Murcielago_Estrategia estrategia) {
+    public Murcielago_Bosque(Enemigo_Estrategia estrategia) {
         this.estrategia = estrategia;
         this.nombre = "Murcielago del Bosque";
         this.vida = 20;
@@ -64,7 +64,7 @@ public class Murcielago_Bosque implements Murcielago {
     }
     
     @Override
-    public Murcielago_Estrategia estrategia() {
+    public Enemigo_Estrategia estrategia() {
         return estrategia;
     }
     
@@ -84,5 +84,29 @@ public class Murcielago_Bosque implements Murcielago {
     @Override
     public int getPuntos() {
         return puntos;
+    }
+    
+    @Override
+    public void printAscii() {
+    	final String VERDE = "\u001B[32m";
+    	final String RESET = "\u001B[0m";
+    	System.out.println(VERDE);
+        System.out.println("      ....._      ");
+        System.out.println("     `.   ``-.                               .-----.._");
+        System.out.println("       `,     `-.                          .:      /`");
+        System.out.println("         :       `\"..                 ..-``       :");
+        System.out.println("         /   ...--:::`n            n.`::...       :");
+        System.out.println("         `:``      .` ::          /  `.     ``---..:.");
+        System.out.println("           `\\    .`  ._:  .-:   ::    `.     .-``");
+        System.out.println("             :  :    :_\\_/: :  .::      `.   /");
+        System.out.println("             : /      \\-../:/_.`-`        \\ :");
+        System.out.println("             :: _.._  Ø` Ø` /`              \\|");
+        System.out.println("             :-`    ``(_. ..-----hh``````/-._:");
+        System.out.println("                         `:      ``     /     `");
+        System.out.println("                         E:            /");
+        System.out.println("                          :          _/");
+        System.out.println("                          :    _..-``");
+        System.out.println("                          l--``");
+        System.out.println(RESET);
     }
 }

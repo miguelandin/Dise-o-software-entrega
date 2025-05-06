@@ -1,10 +1,12 @@
 package Factoria;
 
 import Enemigos.Murcielago_Volcan;
+import Enemigos.Esqueleto_Volcan;
 import Estrategias.Normal_Estrategia;
 import Estrategias.Aumentado_Estrategia;
 import Interfaces.Murcielago;
-import Interfaces.Murcielago_Estrategia;
+import Interfaces.Esqueleto;
+import Interfaces.Enemigo_Estrategia;
 import java.util.Random;
 
 // La clase Factoria_Volcan implementa la creación de enemigos específicos para el mundo del volcán
@@ -16,11 +18,17 @@ public class Factoria_Volcan extends FactoriaEnemigos{
         return new Murcielago_Volcan(estrategia());
     }
     
-    // Método privado para seleccionar aleatoriamente la estrategia del murciélago del volcán
-    private Murcielago_Estrategia estrategia() {
+    // Método para crear un esqueleto específico del volcán
+    @Override
+    public Esqueleto crearEsqueleto() {
+    	return new Esqueleto_Volcan(estrategia());
+    }
+    
+    // Método privado para seleccionar aleatoriamente la estrategia del enemigo del volcán
+    private Enemigo_Estrategia estrategia() {
         Random random = new Random();
         int randomNumber = random.nextInt(3) + 1; // Genera un número aleatorio entre 1 y 3
-        Murcielago_Estrategia estrategia = null;
+        Enemigo_Estrategia estrategia = null;
         
         switch(randomNumber) {
             case 1:

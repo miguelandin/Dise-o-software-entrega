@@ -1,12 +1,13 @@
 package Factoria;
 
 import java.util.Random;
-
 import Enemigos.Murcielago_Tundra;
+import Enemigos.Esqueleto_Tundra;
 import Estrategias.Normal_Estrategia;
 import Estrategias.Aumentado_Estrategia;
 import Interfaces.Murcielago;
-import Interfaces.Murcielago_Estrategia;
+import Interfaces.Esqueleto;
+import Interfaces.Enemigo_Estrategia;
 
 // La clase Factoria_Tundra implementa la creación de enemigos específicos para el mundo de la tundra
 public class Factoria_Tundra extends FactoriaEnemigos {
@@ -17,11 +18,17 @@ public class Factoria_Tundra extends FactoriaEnemigos {
         return new Murcielago_Tundra(estrategia());
     }
     
-    // Método privado para seleccionar aleatoriamente la estrategia del murciélago de la tundra
-    private Murcielago_Estrategia estrategia() {
+    // Método para crear un esqueleto específico de la tundra
+    @Override
+    public Esqueleto crearEsqueleto() {
+    	return new Esqueleto_Tundra(estrategia());
+    }
+    
+    // Método privado para seleccionar aleatoriamente la estrategia del enemigo de la tundra
+    private Enemigo_Estrategia estrategia() {
         Random random = new Random();
         int randomNumber = random.nextInt(3) + 1; // Genera un número aleatorio entre 1 y 3
-        Murcielago_Estrategia estrategia = null;
+        Enemigo_Estrategia estrategia = null;
         
         switch(randomNumber) {
             case 1:

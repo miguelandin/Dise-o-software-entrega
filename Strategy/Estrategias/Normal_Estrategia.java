@@ -1,9 +1,9 @@
 package Estrategias;
 
-import Interfaces.Murcielago_Estrategia;
+import Interfaces.Enemigo_Estrategia;
 
-// La clase Normal_Estrategia implementa la interfaz Murcielago_Estrategia y define una estrategia de ataque normal
-public class Normal_Estrategia implements Murcielago_Estrategia {
+// La clase Normal_Estrategia implementa la interfaz Enemigo_Estrategia y define una estrategia de ataque normal
+public class Normal_Estrategia implements Enemigo_Estrategia {
 
     @Override
     public double aumentarPosibilidadEfecto() {

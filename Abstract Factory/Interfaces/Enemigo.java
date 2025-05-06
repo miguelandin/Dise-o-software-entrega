@@ -23,7 +23,7 @@ public interface Enemigo {
     EstadoJugador estadoAplicable();
     
     // Método para obtener la estrategia específica del enemigo (si la tiene)
-    Murcielago_Estrategia estrategia();
+    Enemigo_Estrategia estrategia();
     
     // Método para que el enemigo reciba un ataque del jugador
     void recibirAtaque(int danio);
@@ -31,7 +31,8 @@ public interface Enemigo {
     // Método para obtener los puntos otorgados al jugador al derrotar este enemigo
     int getPuntos();
     
-    // TO DO add print ASCII
+    // Muestra como se ve el enemigo con arte ASCII
+    void printAscii();
 
 
     /*
