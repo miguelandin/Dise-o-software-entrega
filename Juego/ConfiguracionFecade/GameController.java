@@ -36,7 +36,12 @@ public class GameController {
     public void jugar() {
         Scanner teclado = new Scanner(System.in);
 
-        System.out.println("--- BIENVENIDO A RPGLAND ---");
+        System.out.println(" ____            _        ____  _                       ");
+        System.out.println("|  _ \\ _ __ __ _| | _____/ ___|| | __ _ _   _  ___ _ __ ");
+        System.out.println("| | | | '__/ _` | |/ / _ \\___ \\| |/ _` | | | |/ _ \\ '__|");
+        System.out.println("| |_| | | | (_| |   <  __/___) | | (_| | |_| |  __/ |   ");
+        System.out.println("|____/|_|  \\__,_|_|\\_\\___|____/|_|\\__,_|\\__, |\\___|_|   ");
+        System.out.println("                                        |___/            ");
         System.out.println("Antes de comenzar la aventura, pasaremos a la creaciÃ³n de tu personaje: ");
 
         // Se crea el jugador

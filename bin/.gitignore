@@ -1,5 +1,9 @@
-/Interfaces/
-/Estrategias/
 /ConfiguracionFecade/
-/Factoria/
 /Enemigos/
+/Estados/
+/Estrategias/
+/Factoria/
+/Interfaces/
+/Juego/
+/Jugador/
+/module-info.class
