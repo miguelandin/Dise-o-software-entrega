@@ -18,7 +18,7 @@ public class Esqueleto_Volcan implements Esqueleto {
 
     public Esqueleto_Volcan(Enemigo_Estrategia estrategia) {
         this.estrategia = estrategia;
-        this.nombre = "Esqueleto del Bosque";
+        this.nombre = "Esqueleto del Volcan";
         this.vida = 30;
         this.danio = 20;
         this.magia = 0;
@@ -62,9 +62,9 @@ public class Esqueleto_Volcan implements Esqueleto {
 
 	@Override
 	public void printAscii() {
-		final String AZUL = "\u001B[31m";
+		final String ROJO = "\u001B[31m";
 		final String RESET = "\u001B[0m";
-		System.out.println(AZUL);
+		System.out.println(ROJO);
 		System.out.println("               .7");
         System.out.println("            .'/");
         System.out.println("           / /");

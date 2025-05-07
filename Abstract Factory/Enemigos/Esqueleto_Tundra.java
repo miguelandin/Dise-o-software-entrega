@@ -19,7 +19,7 @@ public class Esqueleto_Tundra implements Esqueleto {
 
     public Esqueleto_Tundra(Enemigo_Estrategia estrategia) {
         this.estrategia = estrategia;
-        this.nombre = "Esqueleto del Bosque";
+        this.nombre = "Esqueleto de Tundra";
         this.vida = 50;
         this.danio = 10;
         this.magia = 0;
@@ -63,9 +63,9 @@ public class Esqueleto_Tundra implements Esqueleto {
 
 	@Override
 	public void printAscii() {
-		final String BLANCO = "\u001B[37m";
+		final String AZUL = "\u001B[34m";
 		final String RESET = "\u001B[0m";
-		System.out.println(BLANCO);
+		System.out.println(AZUL);
 		System.out.println("               .7");
         System.out.println("            .'/");
         System.out.println("           / /");

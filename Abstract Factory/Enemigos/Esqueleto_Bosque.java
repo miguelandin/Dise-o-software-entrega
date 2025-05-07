@@ -63,7 +63,7 @@ public class Esqueleto_Bosque implements Esqueleto {
 
 	@Override
 	public void printAscii() {
-		final String AZUL = "\\u001B[34m";
+		final String AZUL = "\u001B[32m";
 		final String RESET = "\u001B[0m";
 		System.out.println(AZUL);
 		System.out.println("               .7");

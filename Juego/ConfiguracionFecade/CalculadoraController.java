@@ -169,9 +169,9 @@ public class CalculadoraController {
     }
 
     // Método para examinar al enemigo
-    public void examinar_enemigo(Jugador jugador, Murcielago murcielago) {
+    public void examinar_enemigo(Jugador jugador, Enemigo enemigo) {
         if(jugador.getVida() > 0 ) {
-            System.out.println(murcielago.toString());
+            System.out.println(enemigo.toString());
         }
     }
 }

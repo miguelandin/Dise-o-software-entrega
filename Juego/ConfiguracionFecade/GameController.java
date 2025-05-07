@@ -1,5 +1,6 @@
 package ConfiguracionFecade;
 
+import java.util.Random;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import Factoria.FactoriaEnemigos;
@@ -9,6 +10,7 @@ import Factoria.Factoria_Volcan;
 import Interfaces.Enemigo;
 import Interfaces.Mundos;
 import Interfaces.Murcielago;
+import Interfaces.Esqueleto;
 import Jugador.Jugador;
 
 public class GameController {
@@ -46,10 +48,8 @@ public class GameController {
 
         // Se crea el jugador
         Jugador jugador = crearJugador(teclado);
-        Murcielago murcielago;
+        Enemigo enemigo = factoriaEnemigos.crearEsqueleto();
 
-        // Se crea el primer enemigo (murciÃ©lago)
-        murcielago = factoriaEnemigos.crearMurcielago();
 
         // Bucle principal del juego, mientras el jugador tenga vida
         while (jugador.getVida() > 0) {
@@ -59,7 +59,7 @@ public class GameController {
 
             // Se juega en el mundo actual
             if (jugador.getVida() > 0)
-                jugarMundo(jugador, murcielago);
+                jugarMundo(jugador, enemigo);
 
             // Se cambia al siguiente mundo
             if (jugador.getVida() > 0)
@@ -70,12 +70,22 @@ public class GameController {
                 System.out.println("MUNDO: " + mundos.getNombre());
 
             // Se crea un nuevo murciÃ©lago para el prÃ³ximo encuentro
-            if (jugador.getVida() > 0)
-                murcielago = factoriaEnemigos.crearMurcielago();
-
+            if (jugador.getVida() > 0) {
+                // Se crea enemigo aleatorio                
+                Random random = new Random();
+                int r = random.nextInt(2); // genera un número del 0 al 1
+                switch(r) {
+                case 0: // si es 0 genera un esqueleto
+                	enemigo = factoriaEnemigos.crearEsqueleto();
+                	break;
+                case 1: // si es 1 genera un murciélago
+                	enemigo = factoriaEnemigos.crearMurcielago();
+                	break;
+                }
+            }
             // Se juega en el nuevo mundo con el nuevo enemigo
             if (jugador.getVida() > 0)
-                jugarMundo(jugador, murcielago);
+                jugarMundo(jugador, enemigo);
 
             // Se cambia al siguiente mundo nuevamente
             if (jugador.getVida() > 0)
@@ -316,19 +326,18 @@ public class GameController {
     }
 
     // MÃ©todo para jugar en un mundo especÃ­fico con un enemigo
-    private void jugarMundo(Jugador jugador, Murcielago murcielago) {
+    private void jugarMundo(Jugador jugador, Enemigo enemigo) {
 
         Scanner teclado = new Scanner(System.in);
-
         int eleccion = 0;
 
         // Bucle mientras el murciÃ©lago y el jugador estÃ©n vivos
-        while (murcielago.getVida() > 0 && jugador.getVida() > 0) {
+        while (enemigo.getVida() > 0 && jugador.getVida() > 0) {
 
             // Se muestra la informaciÃ³n del jugador y del murciÃ©lago
             System.out.println(jugador.getNombre() + " -> " + mostrarJugador(jugador));
-            System.out.println(murcielago.getNombre() + " ->" + murcielago.getVida());
-            murcielago.printAscii();
+            System.out.println(enemigo.getNombre() + " -> Hp: " + enemigo.getVida());
+            enemigo.printAscii();
 
             // Se solicita la acciÃ³n al jugador
             System.out.println("Que quieres hacer:"
@@ -342,13 +351,13 @@ public class GameController {
                 case 1:
                     // Si la velocidad del jugador es mayor que la del murciÃ©lago, el jugador ataca
                     // primero
-                    if (jugador.getVelocidad() > murcielago.getVelocidad()) {
-                        calculadora.atacar_jugador(jugador, murcielago);
-                        calculadora.atacar_enemigo(murcielago, jugador);
+                    if (jugador.getVelocidad() > enemigo.getVelocidad()) {
+                        calculadora.atacar_jugador(jugador, enemigo);
+                        calculadora.atacar_enemigo(enemigo, jugador);
                     } else {
                         // Si la velocidad del murciÃ©lago es mayor, el murciÃ©lago ataca primero
-                        calculadora.atacar_enemigo(murcielago, jugador);
-                        calculadora.atacar_jugador(jugador, murcielago);
+                        calculadora.atacar_enemigo(enemigo, jugador);
+                        calculadora.atacar_jugador(jugador, enemigo);
                     }
                     break;
 
@@ -363,32 +372,32 @@ public class GameController {
 
                     switch (eleccion) {
                         case 1:
-                            if (jugador.getVelocidad() > murcielago.getVelocidad()) {
+                            if (jugador.getVelocidad() > enemigo.getVelocidad()) {
                                 calculadora.curar(jugador);
-                                calculadora.atacar_enemigo(murcielago, jugador);
+                                calculadora.atacar_enemigo(enemigo, jugador);
                             } else {
-                                calculadora.atacar_enemigo(murcielago, jugador);
+                                calculadora.atacar_enemigo(enemigo, jugador);
                                 calculadora.curar(jugador);
                             }
                             break;
 
                         case 2:
-                            if (jugador.getVelocidad() > murcielago.getVelocidad()) {
+                            if (jugador.getVelocidad() > enemigo.getVelocidad()) {
                                 calculadora.Proteger(jugador);
-                                calculadora.atacar_enemigo(murcielago, jugador);
+                                calculadora.atacar_enemigo(enemigo, jugador);
                             } else {
-                                calculadora.atacar_enemigo(murcielago, jugador);
+                                calculadora.atacar_enemigo(enemigo, jugador);
                                 calculadora.Proteger(jugador);
                             }
                             break;
 
                         case 3:
-                            if (jugador.getVelocidad() > murcielago.getVelocidad()) {
-                                calculadora.examinar_enemigo(jugador, murcielago);
-                                calculadora.atacar_enemigo(murcielago, jugador);
+                            if (jugador.getVelocidad() > enemigo.getVelocidad()) {
+                                calculadora.examinar_enemigo(jugador, enemigo);
+                                calculadora.atacar_enemigo(enemigo, jugador);
                             } else {
-                                calculadora.atacar_enemigo(murcielago, jugador);
-                                calculadora.examinar_enemigo(jugador, murcielago);
+                                calculadora.atacar_enemigo(enemigo, jugador);
+                                calculadora.examinar_enemigo(jugador, enemigo);
                             }
                             break;
                     }
