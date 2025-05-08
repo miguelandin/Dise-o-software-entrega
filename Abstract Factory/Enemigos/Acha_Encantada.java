@@ -19,7 +19,7 @@ public class Acha_Encantada implements ArmaEncantada {
     public Acha_Encantada(Enemigo_Estrategia estrategia) {
         this.estrategia = estrategia;
         this.nombre = "Acha Encantada de hielo";
-        this.vida = 20;
+        this.vida = 15;
         this.danio = 35;
         this.magia = 10;
         this.velocidad = 1;

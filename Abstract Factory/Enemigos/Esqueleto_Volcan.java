@@ -32,22 +32,22 @@ public class Esqueleto_Volcan implements Esqueleto {
 
 	@Override
 	public int getVida() {
-		return vida * Mundos.BOSQUE.getDificultad();
+		return vida * Mundos.VOLCAN.getDificultad();
 	}
 
 	@Override
 	public int getDanio() {
-		return danio * Mundos.BOSQUE.getDificultad();
+		return danio * Mundos.VOLCAN.getDificultad();
 	}
 
 	@Override
 	public int getMagia() {
-		return magia * Mundos.BOSQUE.getDificultad();
+		return magia * Mundos.VOLCAN.getDificultad();
 	}
 
 	@Override
 	public int getVelocidad() {
-		return velocidad * Mundos.BOSQUE.getDificultad();
+		return velocidad * Mundos.VOLCAN.getDificultad();
 	}
 
 	@Override

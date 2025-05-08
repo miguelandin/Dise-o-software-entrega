@@ -9,8 +9,6 @@ import Factoria.Factoria_Tundra;
 import Factoria.Factoria_Volcan;
 import Interfaces.Enemigo;
 import Interfaces.Mundos;
-import Interfaces.Murcielago;
-import Interfaces.Esqueleto;
 import Jugador.Jugador;
 
 public class GameController {
@@ -48,7 +46,7 @@ public class GameController {
 
         // Se crea el jugador
         Jugador jugador = crearJugador(teclado);
-        Enemigo enemigo = factoriaEnemigos.crearEsqueleto();
+        Enemigo enemigo = factoriaEnemigos.crearMurcielago();
 
 
         // Bucle principal del juego, mientras el jugador tenga vida
@@ -69,22 +67,19 @@ public class GameController {
             if (jugador.getVida() > 0)
                 System.out.println("MUNDO: " + mundos.getNombre());
 
-            // Se crea un nuevo murciÃ©lago para el prÃ³ximo encuentro
+            // Se crea un nuevo enemigo para el prÃ³ximo encuentro
             if (jugador.getVida() > 0) {
                 // Se crea enemigo aleatorio                
                 Random random = new Random();
-                int r = random.nextInt(3); // genera un número del 0 al 1
-                switch(r) {
-                case 0: // si es 0 genera un esqueleto
-                	enemigo = factoriaEnemigos.crearEsqueleto();
-                	break;
-                case 1: // si es 1 genera un murciélago
+                int r = random.nextInt(10); // genera un número del 0 al 9
+                if(r >= 0 && r <= 2) // 30% de murcielago
                 	enemigo = factoriaEnemigos.crearMurcielago();
-                	break;
-                case 2: // si es 2 genera una arma encantada
+                else if(r >= 3 && r <= 5) // 30% de esqueleto
+                	enemigo = factoriaEnemigos.crearEsqueleto();
+                else if(r >= 6 && r <= 8) // 30% de arma encantada
                 	enemigo = factoriaEnemigos.crearArma();
-                	break;
-                }
+                else if(r == 9) // 10% de Jefe
+                	enemigo = factoriaEnemigos.crearBoss();
             }
             // Se juega en el nuevo mundo con el nuevo enemigo
             if (jugador.getVida() > 0)
@@ -106,6 +101,10 @@ public class GameController {
 
     // MÃ©todo para cambiar el mundo
     public void cambiarMundo() {
+    	
+    	//limpia la consola para mayor legibilidad
+    	limpiarConsola();
+    	
         if (this.mundos == Mundos.BOSQUE) {
             mundos = Mundos.TUNDRA;
             factoriaEnemigos = new Factoria_Tundra();
@@ -327,6 +326,13 @@ public class GameController {
         return "HP: " + jugador.getVida() + ", ATK: " + jugador.getFuerza() + ", DEF: " + jugador.getArmadura()
                 + ", MAG: " + jugador.getMagia() + ", VEL: " + jugador.getVelocidad();
     }
+    
+    // Método para limpiar la consola
+    private void limpiarConsola() {
+    		for(int i = 0; i < 50; i++)
+    			System.out.println();
+    }
+
 
     // MÃ©todo para jugar en un mundo especÃ­fico con un enemigo
     private void jugarMundo(Jugador jugador, Enemigo enemigo) {
@@ -336,7 +342,7 @@ public class GameController {
 
         // Bucle mientras el murciÃ©lago y el jugador estÃ©n vivos
         while (enemigo.getVida() > 0 && jugador.getVida() > 0) {
-
+        	
             // Se muestra la informaciÃ³n del jugador y del murciÃ©lago
             System.out.println(jugador.getNombre() + " -> " + mostrarJugador(jugador));
             System.out.println(enemigo.getNombre() + " -> Hp: " + enemigo.getVida());
@@ -350,6 +356,10 @@ public class GameController {
 
             eleccion = teclado.nextInt();
 
+        	//limpia la consola para mayor legibilidad
+        	limpiarConsola();
+        	
+        	
             switch (eleccion) {
                 case 1:
                     // Si la velocidad del jugador es mayor que la del murciÃ©lago, el jugador ataca
@@ -372,7 +382,7 @@ public class GameController {
                             + "\nEleccion: ");
 
                     eleccion = teclado.nextInt();
-
+                    
                     switch (eleccion) {
                         case 1:
                             if (jugador.getVelocidad() > enemigo.getVelocidad()) {
@@ -412,6 +422,7 @@ public class GameController {
             if (!jugador.getEstado().nombreEstado().equals("Normal")) {
                 calculadora.recibir_danio_estado(jugador);
             }
+            
         }
     }
 

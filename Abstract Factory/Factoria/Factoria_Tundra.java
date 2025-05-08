@@ -4,11 +4,13 @@ import java.util.Random;
 import Enemigos.Murcielago_Tundra;
 import Enemigos.Acha_Encantada;
 import Enemigos.Esqueleto_Tundra;
+import Enemigos.Grifo;
 import Estrategias.Normal_Estrategia;
 import Estrategias.Aumentado_Estrategia;
 import Interfaces.Murcielago;
 import Interfaces.Esqueleto;
 import Interfaces.ArmaEncantada;
+import Interfaces.Boss;
 import Interfaces.Enemigo_Estrategia;
 
 // La clase Factoria_Tundra implementa la creación de enemigos específicos para el mundo de la tundra
@@ -30,6 +32,11 @@ public class Factoria_Tundra extends FactoriaEnemigos {
     @Override
     public ArmaEncantada crearArma() {
     	return new Acha_Encantada(estrategia());
+    }
+    
+    @Override
+    public Boss crearBoss() {
+    	return new Grifo(estrategia());
     }
     
     // Método privado para seleccionar aleatoriamente la estrategia del enemigo de la tundra

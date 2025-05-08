@@ -4,11 +4,13 @@ import java.util.Random;
 import Enemigos.Murcielago_Bosque;
 import Enemigos.Esqueleto_Bosque;
 import Enemigos.Arco_Encantado;
+import Enemigos.Ciclope;
 import Estrategias.Normal_Estrategia;
 import Estrategias.Aumentado_Estrategia;
 import Interfaces.Murcielago;
 import Interfaces.Esqueleto;
 import Interfaces.ArmaEncantada;
+import Interfaces.Boss;
 import Interfaces.Enemigo_Estrategia;
 
 // La clase Factoria_Bosque implementa la creación de enemigos específicos para el mundo del bosque
@@ -30,6 +32,11 @@ public class Factoria_Bosque extends FactoriaEnemigos {
     @Override
     public ArmaEncantada crearArma() {
     	return new Arco_Encantado(estrategia());
+    }
+    
+    @Override
+    public Boss crearBoss() {
+    	return new Ciclope(estrategia());
     }
     
     // Método privado para seleccionar aleatoriamente la estrategia del enemigo del bosque
