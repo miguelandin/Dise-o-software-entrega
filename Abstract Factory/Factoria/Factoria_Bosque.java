@@ -3,10 +3,12 @@ package Factoria;
 import java.util.Random;
 import Enemigos.Murcielago_Bosque;
 import Enemigos.Esqueleto_Bosque;
+import Enemigos.Arco_Encantado;
 import Estrategias.Normal_Estrategia;
 import Estrategias.Aumentado_Estrategia;
 import Interfaces.Murcielago;
 import Interfaces.Esqueleto;
+import Interfaces.ArmaEncantada;
 import Interfaces.Enemigo_Estrategia;
 
 // La clase Factoria_Bosque implementa la creación de enemigos específicos para el mundo del bosque
@@ -23,7 +25,14 @@ public class Factoria_Bosque extends FactoriaEnemigos {
     public Esqueleto crearEsqueleto() {
     	return new Esqueleto_Bosque(estrategia());
     }
-    // Método privado para seleccionar aleatoriamente la estrategia del murciélago del bosque
+   
+    // Método para crear una arma encantada específica del bosque 
+    @Override
+    public ArmaEncantada crearArma() {
+    	return new Arco_Encantado(estrategia());
+    }
+    
+    // Método privado para seleccionar aleatoriamente la estrategia del enemigo del bosque
     private Enemigo_Estrategia estrategia() {
         Random random = new Random();
         int randomNumber = random.nextInt(2) + 1; // Genera un número aleatorio entre 1 y 2

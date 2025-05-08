@@ -2,10 +2,12 @@ package Factoria;
 
 import Enemigos.Murcielago_Volcan;
 import Enemigos.Esqueleto_Volcan;
+import Enemigos.Espada_Encantada;
 import Estrategias.Normal_Estrategia;
 import Estrategias.Aumentado_Estrategia;
 import Interfaces.Murcielago;
 import Interfaces.Esqueleto;
+import Interfaces.ArmaEncantada;
 import Interfaces.Enemigo_Estrategia;
 import java.util.Random;
 
@@ -22,6 +24,12 @@ public class Factoria_Volcan extends FactoriaEnemigos{
     @Override
     public Esqueleto crearEsqueleto() {
     	return new Esqueleto_Volcan(estrategia());
+    }
+    
+    // Método para crear una arma encantada específica del volcán
+    @Override
+    public ArmaEncantada crearArma() {
+    	return new Espada_Encantada(estrategia());
     }
     
     // Método privado para seleccionar aleatoriamente la estrategia del enemigo del volcán

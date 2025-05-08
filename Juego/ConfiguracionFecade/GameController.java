@@ -73,13 +73,16 @@ public class GameController {
             if (jugador.getVida() > 0) {
                 // Se crea enemigo aleatorio                
                 Random random = new Random();
-                int r = random.nextInt(2); // genera un número del 0 al 1
+                int r = random.nextInt(3); // genera un número del 0 al 1
                 switch(r) {
                 case 0: // si es 0 genera un esqueleto
                 	enemigo = factoriaEnemigos.crearEsqueleto();
                 	break;
                 case 1: // si es 1 genera un murciélago
                 	enemigo = factoriaEnemigos.crearMurcielago();
+                	break;
+                case 2: // si es 2 genera una arma encantada
+                	enemigo = factoriaEnemigos.crearArma();
                 	break;
                 }
             }
