@@ -1,7 +1,6 @@
 package ConfiguracionFecade;
 
 import java.util.Random;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import Factoria.FactoriaEnemigos;
 import Factoria.Factoria_Bosque;
@@ -10,6 +9,7 @@ import Factoria.Factoria_Volcan;
 import Interfaces.Enemigo;
 import Interfaces.Mundos;
 import Jugador.Jugador;
+import refactorizacion.ExtraccionDeMetodo;
 
 public class GameController {
 
@@ -42,7 +42,7 @@ public class GameController {
         System.out.println("| |_| | | | (_| |   <  __/___) | | (_| | |_| |  __/ |   ");
         System.out.println("|____/|_|  \\__,_|_|\\_\\___|____/|_|\\__,_|\\__, |\\___|_|   ");
         System.out.println("                                        |___/            ");
-        System.out.println("Antes de comenzar la aventura, pasaremos a la creaciÃ³n de tu personaje: ");
+        System.out.println("Antes de comenzar la aventura, pasaremos a la creacion de tu personaje: ");
 
         // Se crea el jugador
         Jugador jugador = crearJugador(teclado);
@@ -93,10 +93,19 @@ public class GameController {
             if (jugador.getVida() > 0)
                 System.out.println("Se repite el bucle, mejorando enemigos");
         }
-
-        System.out.println("El jugador ha perdido.");
-
-        teclado.close();
+        
+        // fin del juego
+        System.out.println(jugador.getNombre() + " ha sido brutalmente asesinado por " + enemigo.getNombre() + "\n ¿Volver a emepezar? (s/n)");
+        String respuesta = teclado.next();
+        if(respuesta.equalsIgnoreCase("s")) {
+        	jugador.curar(100); // la única solución que he encontrado
+        	limpiarConsola();
+        	jugar(); // vuelve a empezar
+        }
+        else {
+            teclado.close(); // cierra el scanner
+        	System.exit(0); // cierra el programa
+        }
     }
 
     // MÃ©todo para cambiar el mundo
@@ -186,40 +195,7 @@ public class GameController {
                                 if (puntos > 0) {
                                     System.out.println("\nPuntos restantes para velocidad: " + puntos + "\n");
                                     velocidad = puntos;
-                                    // pergamino de stats
-                                    System.out.println("         _______________________________");
-                                    System.out.println("       / \\                              \\.");
-                                    System.out.println("      |   |                             |.");
-                                    System.out.println("       \\_/|  » DISTRIBUCIÓN DE PUNTOS « |.");
-                                    System.out.println("          |                             |.");
-                                    if (danio > 9) {
-                                        System.out.println("          |  » Daño: " + danio + "                 |.");
-                                    } else {
-                                        System.out.println("          |  » Daño: " + danio + "                  |.");
-                                    }
-                                    System.out.println("          |                             |.");
-                                    if (magia > 9) {
-                                        System.out.println("          |  » Magia: " + magia + "                |.");
-                                    } else {
-                                        System.out.println("          |  » Magia: " + magia + "                 |.");
-                                    }
-                                    System.out.println("          |                             |.");
-                                    if (armadura > 9) {
-                                        System.out.println("          |  » Armadura: " + armadura + "             |.");
-                                    } else {
-                                        System.out.println("          |  » Armadura: " + armadura + "              |.");
-                                    }
-                                    System.out.println("          |                             |.");
-                                    if (velocidad > 9) {
-                                        System.out.println("          |  » Velocidad: " + velocidad + "            |.");
-                                    } else {
-                                        System.out
-                                                .println("          |  » Velocidad: " + velocidad + "             |.");
-                                    }
-                                    System.out.println("          |                             |.");
-                                    System.out.println("          |   __________________________|__");
-                                    System.out.println("          |  /                            /.");
-                                    System.out.println("          \\_/____________________________/.");
+                                    ExtraccionDeMetodo.imprimirDistribucionPuntosPersonalizado(danio, magia, armadura, velocidad);
                                 }
                             }
                         }
@@ -236,9 +212,9 @@ public class GameController {
 
                     do {
                         System.out.println("\nPersonajes disponibles:"
-                                + "\n1. Caballero (DaÃ±o: 10, Magia: 1, Armadura: 8, Velocidad: 6)"
-                                + "\n2. Tanque(DaÃ±o:5 , Magia: 1, Armadura: 15, Velocidad: 4)"
-                                + "\n3. Mago(DaÃ±o: 2, Magia: 15, Armadura: 2, Velocidad: 6)"
+                                + "\n1. Caballero (Dano: 10, Magia: 1, Armadura: 8, Velocidad: 6)"
+                                + "\n2. Tanque(Dano:5 , Magia: 1, Armadura: 15, Velocidad: 4)"
+                                + "\n3. Mago(Dano: 2, Magia: 15, Armadura: 2, Velocidad: 6)"
                                 + "\nSeleccion: ");
 
                         eleccion2 = teclado.nextInt();
@@ -271,37 +247,10 @@ public class GameController {
                                 System.out.println("ERROR. Debes introducir una opcion valida.");
                                 break;
                         }
-                        // pergamino de stats
-                        System.out.println("         _______________________________");
-                        System.out.println("       / \\                              \\.");
-                        System.out.println("      |   |                             |.");
-                        System.out.println("       \\_/|  » DISTRIBUCIÓN DE PUNTOS « |.");
-                        System.out.println("          |                             |.");
-                        if (eleccion2 == 1) {
-                            System.out.println("          |  » Daño: " + danio + "                 |.");
-                        } else {
-                            System.out.println("          |  » Daño: " + danio + "                  |.");
-                        }
-                        System.out.println("          |                             |.");
-                        if (eleccion2 == 3) {
-                            System.out.println("          |  » Magia: " + magia + "                |.");
-                        } else {
-                            System.out.println("          |  » Magia: " + magia + "                 |.");
-                        }
-                        System.out.println("          |                             |.");
-                        if (eleccion2 == 2) {
-                            System.out.println("          |  » Armadura: " + armadura + "             |.");
-                        } else {
-                            System.out.println("          |  » Armadura: " + armadura + "              |.");
-                        }
-                        System.out.println("          |                             |.");
-                        System.out.println("          |  » Velocidad: " + velocidad + "             |.");
-                        System.out.println("          |                             |.");
-                        System.out.println("          |   __________________________|__");
-                        System.out.println("          |  /                            /.");
-                        System.out.println("          \\_/____________________________/.");
+        
+                        ExtraccionDeMetodo.imprimirDistribucionPuntosClases(eleccion2, danio, magia, armadura, velocidad);
                         // Confirmar si el usuario está de acuerdo con la distribución
-                        System.out.print("\n¿Estás listo para la aventura que te espera? (s/n): ");
+                        System.out.print("\n¿Estás listo para la aventura que te espera? (S/n): ");
                         char respuesta = teclado.next().charAt(0);
                         confirmado2 = (respuesta == 's' || respuesta == 'S'); // Si la respuesta es 's' o 'S', se
                                                                               // confirma
@@ -314,10 +263,10 @@ public class GameController {
                     break;
             }
         } while (eleccion < 1 || eleccion > 2);
-
+        limpiarConsola(); // limpiar consola para más legibilidad
+        
         // Se crea la instancia del jugador con los atributos proporcionados
         jugador = Jugador.getInstancia(nombre, 100, danio, magia, armadura, velocidad);
-
         return jugador;
     }
 
@@ -328,7 +277,7 @@ public class GameController {
     }
     
     // Método para limpiar la consola
-    private void limpiarConsola() {
+    private static void limpiarConsola() {
     		for(int i = 0; i < 50; i++)
     			System.out.println();
     }

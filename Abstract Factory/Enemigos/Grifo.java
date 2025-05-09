@@ -83,7 +83,7 @@ public class Grifo implements Boss {
         System.out.println("     ||    ||      .'       \\ \\");
         System.out.println("     ||    ||    .'_         \\ \\");
         System.out.println("      \\\\   //   / _ `\\        \\ \\__");
-        System.out.println("jgs    \\'-'/(   _  `\\,;        \\ '--:,");
+        System.out.println("       \\'-'/(   _  `\\,;        \\ '--:,");
         System.out.println("        `\"`  `\"` `-,,;         `\"`\",,;");
         System.out.println(RESET);
 	}

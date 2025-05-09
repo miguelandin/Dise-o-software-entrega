@@ -2,11 +2,11 @@ package ConfiguracionFecade;
 
 import java.util.Random;
 import java.util.Scanner;
-
 import Estados.EstadoNormal;
 import Interfaces.Enemigo;
 import Interfaces.Murcielago;
 import Jugador.Jugador;
+import refactorizacion.ExtraccionDeMetodo;
 
 // La clase CalculadoraController implementa la lógica para el combate entre el jugador y los enemigos
 public class CalculadoraController {
@@ -56,6 +56,7 @@ public class CalculadoraController {
                 }
 
                 if(jugador.getVida() <= 0) {
+                	ExtraccionDeMetodo.printGameOver();
                     System.out.println("El jugador " + jugador.getNombre()+ " ha sido eliminado.");
                 }
             } else {
